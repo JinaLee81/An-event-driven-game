@@ -6,13 +6,15 @@ Created:  04/08/2013 06:45:04 PM
 Revision:  none
 Compiler:  gcc
 
-Make: gcc -g bounstr.c -lncurses -lrt -o bounce
+Make: gcc -g animation_aio_event.c.c -lncurses -lrt -o exename
  
 
 Author:  Art Diky
 Company:  Hunter College
-Description: An event-driven program demonstarting the usage of library 
-ncurses and asynchronus IO handling for making an Animation 
+Description: An event-driven game demonstarting the usage of library 
+NCurses and asynchronus IO handling. 
+The program makes a simple animation and receives user input to control the
+speed/direction of animation
 The program installs two handlers, one to process asynchronus 
 user input and the other to process timer events to adjust 
 the speed of animation
@@ -56,8 +58,8 @@ int finished;
 volatile sig_atomic_t input_ready;
 struct aiocb kbcbuf;
 
-void on_alarm(int);          // handler for SIGALRM
-void on_input(int);          // handler for SIGIO
+void on_alarm(int);          //Event-handler for Timer events
+void on_input(int);          // Event-handler for User Inputs
 int update_from_input(int*, int*);
 void setup_aio_buffer(struct aiocb *buff);
 
@@ -182,7 +184,7 @@ int update_from_input(int *speed, int *dir)
 	 int numSpeedChangeRequests = 0;
     char mssg[40];
     char *cp = (char *) kbcbuf.aio_buf; // cast to char
-    int finished = FALSE;
+    finished = FALSE;
 
     // Check for errors
     if ( aio_error(&kbcbuf) == 1)
