@@ -6,7 +6,7 @@ Created:  04/08/2013 06:45:04 PM
 Revision:  none
 Compiler:  gcc
 
-Make: gcc -g animation_aio_event.c.c -lncurses -lrt -o exename
+Make: gcc -g bouncer.c -lncurses -lrt -o bouncer
  
 
 Author:  Art Diky
