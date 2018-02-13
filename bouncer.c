@@ -226,13 +226,14 @@ int update_from_input(int *speed, int *dir)
  						  numSpeedChangeRequests++;
                     break;
             }
-				if (is_changed)
-            {
-                set_timer(ITIMER_REAL, 1000 / *speed, 1000 / *speed);
-                sprintf(mssg, "Current speed: %d (c/s)", *speed);
-                mvaddstr(LINES-1, 0, mssg);
-					 numTimerAdjustments++;
-            }
+		//usleep(500); /Uncomment it to see the affect of race*/
+	    if (is_changed)
+           {
+               set_timer(ITIMER_REAL, 1000 / *speed, 1000 / *speed);
+               sprintf(mssg, "Current speed: %d (c/s)", *speed);
+               mvaddstr(LINES-1, 0, mssg);
+	      numTimerAdjustments++;
+           }
             assert(numSpeedChangeRequests==numTimerAdjustments); 
             move(LINES-1, COLS-12);
             sprintf(mssg, "Last char: %c", c);
